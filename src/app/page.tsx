@@ -4,8 +4,12 @@ import { useAuth } from '@/Context/AuthContext';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const { user, logOut,signIn } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; };
+  const { user, logOut,signIn,loading } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; loading: boolean; };
   const router = useRouter();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   if (user) {
     // If the user is authenticated, redirect to another page or render something
@@ -13,7 +17,7 @@ export default function Page() {
       <div>
         <h1>Welcome, {user.displayName || 'User'}!</h1>
         <button onClick={() => logOut()}>Log Out</button>
-        <button onClick={() => router.push('/dashboard')}>Go to Dashboard</button>
+        <button onClick={() => router.push('/dashboard')}>Go to Dashboard </button>
       </div>
     );
   }else{

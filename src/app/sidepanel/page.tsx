@@ -12,7 +12,7 @@ import { useAuth } from '@/Context/AuthContext';
 
 
 export default function Page() {
-    const { user, logOut,signIn } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; };
+    const { user, logOut,signIn,loading } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; loading: boolean; };
     const [sidePanelClient, setSidePanelClient] = useState<MeetSidePanelClient>();
 
     // Launches the main stage when the main button is clicked.
@@ -37,6 +37,11 @@ export default function Page() {
         })();
     }, []);
 
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
     return (
         <div>
             <div>
@@ -52,6 +57,7 @@ export default function Page() {
             <button onClick={startActivity}>
                 Launch Activity in Main Stage.
             </button>
+
         </div>
     );
 }
