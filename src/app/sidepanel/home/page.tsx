@@ -1,3 +1,4 @@
+'use client';
 import { useAuth } from '@/Context/AuthContext';
 
 export default function Page (){
