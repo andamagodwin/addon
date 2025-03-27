@@ -6,8 +6,13 @@ import {
     MeetSidePanelClient,
 } from '@googleworkspace/meet-addons/meet.addons';
 import { CLOUD_PROJECT_NUMBER, MAIN_STAGE_URL } from '../../constants';
+import { useAuth } from '@/Context/AuthContext';
+
+
+
 
 export default function Page() {
+    const { user, logOut,signIn } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; };
     const [sidePanelClient, setSidePanelClient] = useState<MeetSidePanelClient>();
 
     // Launches the main stage when the main button is clicked.
@@ -35,7 +40,14 @@ export default function Page() {
     return (
         <div>
             <div>
-                This is the add-on Side Panel. Only you can see this.
+                {user ? (
+                  <div>
+                    <p>Welcome, {user.displayName || user.email}!</p>
+                    <button onClick={logOut} className='bg-green-500 cursor-pointer'>Sign Out</button>
+                  </div>
+                ) : (
+                  <button onClick={signIn} className='bg-green-500 cursor-pointer'>Sign In with Google</button>
+                )}
             </div>
             <button onClick={startActivity}>
                 Launch Activity in Main Stage.

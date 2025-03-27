@@ -1,7 +1,30 @@
+'use client';
+
+import { useAuth } from '@/Context/AuthContext';
+import { useRouter } from 'next/navigation';
+
+export default function Page() {
+  const { user, logOut,signIn } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; };
+  const router = useRouter();
+
+  if (user) {
+    // If the user is authenticated, redirect to another page or render something
+    return (
+      <div>
+        <h1>Welcome, {user.displayName || 'User'}!</h1>
+        <button onClick={() => logOut()}>Log Out</button>
+        <button onClick={() => router.push('/dashboard')}>Go to Dashboard</button>
+      </div>
+    );
+  }else{
+    // If the user is not authenticated, render a sign-in button
+    return (
+      <div>
+        <h1>Lingomeet-addon</h1>
+        <button onClick={() => signIn()}>Sign in with Google</button>
+      </div>
+    );
+  }
 
 
-export default function Home() {
-  return (
-    <div>Lingomeet-addon</div>
-  );
 }
