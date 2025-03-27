@@ -7,12 +7,14 @@ import {
 } from '@googleworkspace/meet-addons/meet.addons';
 import { CLOUD_PROJECT_NUMBER, MAIN_STAGE_URL } from '../../constants';
 import { useAuth } from '@/Context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 
 
 
 export default function Page() {
-    const { user, logOut,signIn,loading } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; loading: boolean; };
+    const router = useRouter();
+    const { user,signIn,loading } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; loading: boolean; };
     const [sidePanelClient, setSidePanelClient] = useState<MeetSidePanelClient>();
 
     // Launches the main stage when the main button is clicked.
@@ -37,22 +39,26 @@ export default function Page() {
         })();
     }, []);
 
+    // Redirect to home page after sign-in
+    useEffect(() => {
+        if (user) {
+            router.push('/sidepanel/home'); // Redirect to the home page
+        }
+    }, [user, router]);
+
 
     if (loading) {
         return <p>Loading...</p>;
     }
 
+
+
     return (
         <div>
             <div>
-                {user ? (
-                  <div>
-                    <p>Welcome, {user.displayName || user.email}!</p>
-                    <button onClick={logOut} className='bg-green-500 cursor-pointer'>Sign Out</button>
-                  </div>
-                ) : (
+                
                   <button onClick={signIn} className='bg-green-500 cursor-pointer'>Sign In with Google</button>
-                )}
+        
             </div>
             <button onClick={startActivity}>
                 Launch Activity in Main Stage.
