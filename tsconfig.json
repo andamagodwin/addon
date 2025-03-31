@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/Context/AuthContext.js", "src/app/api/transcribe/route.ts", "src/components/sidepanel/Transcriber.jsx", "src/components/Transcription.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","src/types/types.d.ts", "src/Context/AuthContext.js", "src/app/api/transcribe/route.ts", "src/components/sidepanel/Transcriber.jsx", "src/components/Transcription.tsx", "src/components/sidepanel/SpeechToText.jsx"],
   "exclude": ["node_modules"]
 }

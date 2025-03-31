@@ -1,7 +1,8 @@
 'use client';
 
 
-import Transcription from '@/components/Transcription';
+
+import SpeechToText from '@/components/sidepanel/SpeechToText';
 import { useAuth } from '@/Context/AuthContext';
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +21,7 @@ export default function Page() {
         <h1>Welcome, {user.displayName || 'User'}!</h1>
         <button onClick={() => logOut()}>Log Out</button>
         <button onClick={() => router.push('/dashboard')}>Go to Dashboard </button>
-        <Transcription/>
+        <SpeechToText/>
       </div>
     );
   }else{
@@ -29,7 +30,7 @@ export default function Page() {
       <div>
         <h1>Lingomeet-addon</h1>
         <button onClick={() => signIn()}>Sign in with Google</button>
-        <Transcription/>
+        
       </div>
     );
   }
