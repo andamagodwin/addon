@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-cloud/speech": "^7.0.1",
     "@googleworkspace/meet-addons": "^1.2.0",
     "firebase": "^11.5.0",
     "framer-motion": "^12.6.2",
     "next": "15.2.4",
+    "node-record-lpcm16": "^1.0.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
