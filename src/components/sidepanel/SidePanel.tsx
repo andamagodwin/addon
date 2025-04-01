@@ -31,7 +31,7 @@ export default function SidePanel() {
   ];
 
   return (
-    <div className="h-[500px] w-[350px] bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="h-[500px] w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <TabsComponent tabs={tabs} defaultTab="transcript" />
     </div>
   );

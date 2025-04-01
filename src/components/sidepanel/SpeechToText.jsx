@@ -70,9 +70,7 @@ export default function SpeechToText() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold text-blue-600 mb-4">Live Transcription</h1>
-        
+      <div className="bg-white rounded-lg">
         <div className="flex justify-center mb-6">
           <button
             onClick={toggleListening}

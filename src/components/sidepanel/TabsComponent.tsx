@@ -20,7 +20,7 @@ export default function TabsComponent({ tabs, defaultTab }: TabsProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Tab Headers */}
-      <div className="flex border-b border-gray-200 dark:border-gray-700">
+      <div className="flex justify-evenly border-b w-full border-gray-200 dark:border-gray-700">
         {tabs.map((tab) => (
           <button
             key={tab.id}

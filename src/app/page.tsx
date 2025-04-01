@@ -1,7 +1,5 @@
 'use client';
 
-
-
 import SpeechToText from '@/components/sidepanel/SpeechToText';
 import { useAuth } from '@/Context/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -9,7 +7,6 @@ import { useRouter } from 'next/navigation';
 export default function Page() {
   const { user, logOut,signIn,loading } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; loading: boolean; };
   const router = useRouter();
-
   if (loading) {
     return <p>Loading...</p>;
   }

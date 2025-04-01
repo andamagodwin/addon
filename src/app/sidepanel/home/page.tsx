@@ -9,7 +9,7 @@ export default function Page (){
         return <p>Loading...</p>;
     }
     return (
-        <div>
+        <div className='flex-col justify-center align-middle items-center w-full bg-green-500'>
             <h1>Hi {user?.displayName}</h1>
             <SidePanel/>
         </div>
