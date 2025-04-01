@@ -15,28 +15,16 @@ const data = {
     email: "alex@edutech.com",
     avatar: "/placeholder.svg?height=32&width=32",
   },
-  teams: [
-    {
-      name: "EduTech Pro",
-      logo: BookOpen,
-      plan: "Enterprise",
-    },
-    {
-      name: "CS Department",
-      logo: Video,
-      plan: "Team",
-    },
-  ],
+  
   navMain: [
     {
       title: "Home",
-      url: "/dashboard",
+      url: "/dashboard/home",
       icon: Home,
-      isActive: true,
     },
     {
       title: "My Meetings",
-      url: "/meetings",
+      url: "/dashboard/meetings",
       icon: Video,
     },
     {
