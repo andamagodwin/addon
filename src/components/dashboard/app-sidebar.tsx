@@ -51,7 +51,7 @@ const data = {
     },
     {
       title: "Analytics",
-      url: "/analytics",
+      url: "/dashboard/analytics",
       icon: BarChart3,
     },
     {
