@@ -1,10 +1,14 @@
-'use client';
+'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
-import { auth } from '../../firebase'; // Adjusted import path for firebase.js
+import { 
+  onAuthStateChanged, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  signOut 
+} from 'firebase/auth';
+import { auth } from '../../firebase';
 
-// Create the AuthContext with a default value of null
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -13,7 +17,16 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        setUser({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          displayName: currentUser.displayName,
+          photoURL: currentUser.photoURL,
+        });
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
     return () => unsubscribe();
@@ -21,15 +34,50 @@ export function AuthProvider({ children }) {
 
   const signIn = async () => {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    // Add required scope for Google Calendar API
+    provider.addScope('https://www.googleapis.com/auth/calendar');
+    
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      
+      setUser({
+        uid: result.user.uid,
+        email: result.user.email,
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+        googleAccessToken: token
+      });
+    } catch (error) {
+      console.error('Sign in error:', error);
+      throw error;
+    }
+  };
+
+  // Function to refresh or get a new token if needed
+  const getGoogleToken = async () => {
+    if (user?.googleAccessToken) {
+      return user.googleAccessToken;
+    }
+    
+    // If no token exists, trigger a new sign-in
+    try {
+      await signIn();
+      return user?.googleAccessToken || null;
+    } catch (error) {
+      console.error('Failed to get access token:', error);
+      return null;
+    }
   };
 
   const logOut = async () => {
     await signOut(auth);
+    setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, logOut, loading }}>
+    <AuthContext.Provider value={{ user, signIn, logOut, loading, getGoogleToken }}>
       {children}
     </AuthContext.Provider>
   );
