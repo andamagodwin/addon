@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Calendar } from '@/components/ui/calendar'
+
+
 import {
   Dialog,
   DialogContent,
@@ -23,7 +24,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 
 export default function Page() {
-  const [date, setDate] = useState<Date | undefined>(new Date())
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   // Sample meetings data
@@ -90,12 +90,7 @@ export default function Page() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label>Date</label>
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    className="rounded-md border"
-                  />
+                  
                 </div>
                 
                 <div className="space-y-4">
