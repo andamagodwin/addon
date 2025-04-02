@@ -42,7 +42,7 @@ export function NavMain({
                 tooltip={item.title}
               >
                 <Link href={item.url}>
-                  {item.icon && <item.icon />}
+                  {item.icon && <item.icon color="#5c5858"/>}
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>

@@ -4,8 +4,8 @@ import type * as React from "react"
 import { BarChart3, BookOpen, Calendar, FileAudio, Home, MessageSquare, Settings, Video, VoteIcon } from "lucide-react"
 
 import { NavMain } from "./nav-main"
-import { NavUser } from "./nav-user"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar"
+// import { NavUser } from "./nav-user"
+import { Sidebar, SidebarContent, SidebarHeader, SidebarRail } from "@/components/ui/sidebar"
 import Image from "next/image"
 
 // This is sample data.
@@ -23,7 +23,7 @@ const data = {
       icon: Home,
     },
     {
-      title: "My Meetings",
+      title: "My Lectures",
       url: "/dashboard/meetings",
       icon: Video,
     },
@@ -59,7 +59,7 @@ const data = {
     },
     {
       title: "Schedule",
-      url: "/schedule",
+      url: "/dashboard/schedule",
       icon: Calendar,
     },
     {
@@ -82,9 +82,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <NavUser user={data.user} />
-      </SidebarFooter>
+      </SidebarFooter> */}
       <SidebarRail />
     </Sidebar>
   )
