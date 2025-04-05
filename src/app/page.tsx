@@ -1,31 +1,12 @@
-'use client';
+'use client'
 
-// import SpeechToText from '@/components/sidepanel/SpeechToText';
-import { useAuth } from '@/Context/AuthContext';
-import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const { user,signIn,loading } = useAuth() as { user: { displayName: string; email: string } | null; logOut: () => void; signIn: () => void; loading: boolean; };
-  const router = useRouter();
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (user) {
-
-    // If the user is authenticated, redirect to another page or render something
-    // For example, you can redirect to the dashboard page
-    router.push('/dashboard');
-  }else{
-    // If the user is not authenticated, render a sign-in button
-    return (
-      <div>
-        <h1>Lingomeet-addon</h1>
-        <button onClick={() => signIn()}>Sign in with Google</button>
-        
-      </div>
-    );
-  }
-
-
+  return (
+    <div>
+      <h1>Welcome to the Home Page</h1>
+      
+      <p>This is where you can manage your meetings and activities.</p>
+    </div>
+  )
 }

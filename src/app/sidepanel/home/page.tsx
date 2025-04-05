@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import SidePanel from "@/components/sidepanel/SidePanel"
-import { useAuth } from "@/Context/AuthContext"
+import { useAuthContext } from "@/Context/AuthContext"
 import { Avatar } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,16 +19,14 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default function Page() {
-  const { user, logOut, loading } = useAuth() as {
-    user: { displayName: string; email: string } | null
-    logOut: () => void
-    signIn: () => void
-    loading: boolean
-  }
+  const {auth, isLoading,logout} = useAuthContext()
+  console.log("auth",auth)
+  
+  
 
   const [showExtensionAlert, setShowExtensionAlert] = useState(true)
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -36,14 +34,15 @@ export default function Page() {
     )
   }
 
+
   // Get user initials for the avatar
   const getUserInitials = () => {
-    if (!user?.displayName) return "?"
-    const nameParts = user.displayName.split(" ")
+    if (!auth.user?.name) return "?"
+    const nameParts = auth.user.name.split(" ")
     if (nameParts.length >= 2) {
       return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase()
     }
-    return user.displayName.substring(0, 2).toUpperCase()
+    return auth.user.name.substring(0, 2).toUpperCase()
   }
 
   return (
@@ -79,8 +78,8 @@ export default function Page() {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>
                 <div className="flex flex-col">
-                  <span>{user?.displayName}</span>
-                  <span className="text-xs text-muted-foreground">{user?.email}</span>
+                  <span>{auth.user?.name}</span>
+                  <span className="text-xs text-muted-foreground">{auth.user?.email}</span>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -93,7 +92,7 @@ export default function Page() {
                 <span>Settings</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={logOut}>
+              <DropdownMenuItem onClick={logout}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>
@@ -107,7 +106,7 @@ export default function Page() {
         <div className="max-w-7xl mx-auto">
           <Card className="mb-6">
             <CardContent className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">Welcome back, {user?.displayName}!</h2>
+              <h2 className="text-2xl font-semibold mb-4">Welcome back, {auth.user?.name}!</h2>
               <p className="text-muted-foreground">Access your addon features and settings below.</p>
             </CardContent>
           </Card>
