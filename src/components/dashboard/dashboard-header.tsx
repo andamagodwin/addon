@@ -1,7 +1,7 @@
 "use client"
 
 import {  LogOut, Settings, User } from "lucide-react"
-import { useAuth } from "@/Context/AuthContext"
+import { useAuthContext } from "@/Context/AuthContext"
 
 // import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
@@ -9,13 +9,8 @@ import { Avatar } from "../ui/avatar"
 // import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu"
 
 export function DashboardHeader() {
-  const { user, logOut } = useAuth() as {
-     user: { displayName: string; email: string } | null
-     logOut: () => void
-     signIn: () => void
-     loading: boolean
-  }
-
+  const { auth,logout} = useAuthContext()
+  const user = auth?.user
   const getUserInitials = () => {
     if (!user?.displayName) return "?"
     const nameParts = user.displayName.split(" ")
@@ -52,7 +47,7 @@ export function DashboardHeader() {
                 <span>Settings</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={logOut}>
+              <DropdownMenuItem onClick={logout}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>
