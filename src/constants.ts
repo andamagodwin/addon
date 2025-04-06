@@ -1,3 +1,3 @@
 
-export const CLOUD_PROJECT_NUMBER: string = "44770182672";
-export const MAIN_STAGE_URL: string = "https://lingomeet-addon--ingomeet-addon.europe-west4.hosted.app/mainstage"
+export const CLOUD_PROJECT_NUMBER: string = "275545075771";
+export const MAIN_STAGE_URL: string = "https://addon.lingomeet.space/mainstage"
