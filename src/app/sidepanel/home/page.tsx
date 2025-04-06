@@ -17,6 +17,7 @@ import {
 import { AlertCircle, Settings, User, LogOut, CircleX } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Card, CardContent } from "@/components/ui/card"
+import Image from "next/image"
 
 export default function Page() {
   const {auth, isLoading,logout} = useAuthContext()
@@ -67,7 +68,10 @@ export default function Page() {
       {/* Header with User Menu */}
       <header className="border-b py-3 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Lingomeet</h1>
+          {/* <h1 className="text-xl font-semibold">Lingomeet</h1> */}
+          <div>
+            <Image src="/logo-color-png.png" alt="Lingomeet Logo" width={40} height={40} />
+          </div>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
