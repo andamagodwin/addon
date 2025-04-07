@@ -20,11 +20,19 @@ import Image from "next/image"
 import { useSidePanel } from "@/Context/SidePanelContext"
 
 export default function Page() {
-  const {startActivity} = useSidePanel()
+  const {startActivity,isInitialized} = useSidePanel()
   const {auth, isLoading,logout} = useAuthContext()
   console.log("auth",auth)
   
-  
+  const handleStartActivity = async () => {
+    try {
+      await startActivity();
+    } catch (error) {
+      console.error('Failed to start activity:', error);
+      alert('Failed to start activity. Please try again.');
+    }
+
+  }
 
   const [showExtensionAlert, setShowExtensionAlert] = useState(true)
 
@@ -76,7 +84,15 @@ export default function Page() {
           <h5 className="text-sm font-semibold mb-1">Hi, {auth.user?.name}!</h5>
           {auth.user?.userType === "lecturer" && (
             <div>
-              <button className="text-sm font-semibold p-2 bg-green-500" onClick={() => startActivity()}>Take Attendance</button>
+              {isInitialized ? (
+                <button className="text-sm font-semibold p-2 bg-green-500" onClick={handleStartActivity}>
+                  Take Attendance
+                </button>
+              ) : (
+                <button className="text-sm font-semibold p-2 bg-gray-400 cursor-not-allowed">
+                  Initializing Side Panel...
+                </button>
+              )}
             </div>
           )}
 

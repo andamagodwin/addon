@@ -5,21 +5,32 @@ import { meet, MeetSidePanelClient } from '@googleworkspace/meet-addons/meet.add
 import { CLOUD_PROJECT_NUMBER, MAIN_STAGE_URL } from '../constants';
 
 interface SidePanelContextType {
-  startActivity: () => Promise<void>;
-  sidePanelClient: MeetSidePanelClient | null;
+    startActivity: () => Promise<void>;
+    sidePanelClient: MeetSidePanelClient | null;
+    isInitialized: boolean; // Add this
 }
+  
+  
+
 
 const SidePanelContext = createContext<SidePanelContextType | null>(null);
 
 export function SidePanelProvider({ children }: { children: ReactNode }) {
   const [sidePanelClient, setSidePanelClient] = useState<MeetSidePanelClient | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const session = await meet.addon.createAddonSession({
-        cloudProjectNumber: CLOUD_PROJECT_NUMBER,
-      });
-      setSidePanelClient(await session.createSidePanelClient());
+      try {
+        const session = await meet.addon.createAddonSession({
+          cloudProjectNumber: CLOUD_PROJECT_NUMBER,
+        });
+        const client = await session.createSidePanelClient();
+        setSidePanelClient(client);
+        setIsInitialized(true); // Mark as initialized
+      } catch (error) {
+        console.error('Failed to initialize side panel:', error);
+      }
     })();
   }, []);
 
@@ -33,7 +44,7 @@ export function SidePanelProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <SidePanelContext.Provider value={{ startActivity, sidePanelClient }}>
+    <SidePanelContext.Provider value={{ startActivity, sidePanelClient, isInitialized }}>
       {children}
     </SidePanelContext.Provider>
   );
