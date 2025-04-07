@@ -17,8 +17,10 @@ import {
 import { AlertCircle, Settings, User, LogOut, CircleX } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Image from "next/image"
+import { useSidePanel } from "@/Context/SidePanelContext"
 
 export default function Page() {
+  const {startActivity} = useSidePanel()
   const {auth, isLoading,logout} = useAuthContext()
   console.log("auth",auth)
   
@@ -72,6 +74,11 @@ export default function Page() {
             <Image src="/logo-color-png.png" alt="Lingomeet Logo" width={40} height={40} />
           </div>
           <h5 className="text-sm font-semibold mb-1">Hi, {auth.user?.name}!</h5>
+          {auth.user?.userType === "lecturer" && (
+            <div>
+              <button className="text-sm font-semibold p-2 bg-green-500" onClick={() => startActivity()}>Take Attendance</button>
+            </div>
+          )}
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

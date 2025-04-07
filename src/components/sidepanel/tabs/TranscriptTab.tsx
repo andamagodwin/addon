@@ -120,7 +120,7 @@ export default function TranscriptTab() {
 
 
 
-        <div>
+        <div className="hidden">
         <RealtimeTranscription ref={transcriptionRef} onStart={handleStart} />
         </div>
         

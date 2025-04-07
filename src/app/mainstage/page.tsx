@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { meet } from '@googleworkspace/meet-addons/meet.addons';
 import { CLOUD_PROJECT_NUMBER } from '../../constants';
+import AttendanceForm from '@/components/mainstage/AttendanceForm';
 
 export default function Page() {
     /**
@@ -20,11 +21,7 @@ export default function Page() {
 
     return (
         <div>
-            <div>
-                This is the add-on Main Stage.
-                Everyone in the call can see this.
-            </div>
-            <div>Hello, world!</div>
+            <AttendanceForm/>
         </div>
     );
 }
