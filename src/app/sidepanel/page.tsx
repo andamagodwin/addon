@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import axios from 'axios';
 import { CredentialResponse } from '@react-oauth/google';
+import Image from 'next/image';
 
 
 
@@ -20,6 +21,7 @@ import { CredentialResponse } from '@react-oauth/google';
 export default function Page() {
     const router = useRouter();
     const {setAuth,loading,user} = useAuthContext();
+    // const [isLoading, setIsLoading] = useState(false);
     const [sidePanelClient, setSidePanelClient] = useState<MeetSidePanelClient>();
 
     // Launches the main stage when the main button is clicked.
@@ -73,6 +75,7 @@ export default function Page() {
             });
             
             console.log('Google login successful:', response.data);
+            
             // Redirect to the home page or perform any other action
             router.push('/sidepanel/home'); // Redirect to the home page
         } catch (err) {
@@ -90,30 +93,39 @@ export default function Page() {
 
 
     return (
-        <div>
-            <GoogleOAuthProvider 
-                clientId={CLIENT_ID}>
-
-                <GoogleLogin
-                    onSuccess={handleGoogleSuccess}
-                    onError={() => {
-                        console.log('Login Failed');
-                    }}
-                    auto_select={true}
-                    useOneTap
-                    theme="filled_blue"
-                    size="large"
-                    text="continue_with"
-                    shape="rectangular"
-                />
-
-            </GoogleOAuthProvider>
-            
-            
+        <div className="flex flex-col items-center justify-center w-full h-screen bg-gray-50 dark:bg-gray-900">
+          {/* Logo Section */}
+          <div className="mb-8">
+            <Image
+              src="/logo-color-png.png" // Replace with the path to your logo
+              alt="Lingomeet Logo"
+              width={100}
+              height={100}
+            />
+          </div>
+      
+          {/* Google Login Section */}
+          <GoogleOAuthProvider clientId={CLIENT_ID}>
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+              auto_select={true}
+              useOneTap
+              theme="filled_blue"
+              size="large"
+              text="continue_with"
+              shape="rectangular"
+            />
+          </GoogleOAuthProvider>
+      
+          {/* Hidden Button for Debugging */}
+          <div className="hidden">
             <button onClick={startActivity}>
-                Launch Activity in Main Stage.
+              Launch Activity in Main Stage.
             </button>
-
+          </div>
         </div>
-    );
+      );
 }

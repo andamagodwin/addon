@@ -21,15 +21,13 @@ export function TranscriptPanel({
   const combinedTranscription = transcriptionArray.join(" ");
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center gap-6 px-4">
+    <div className="flex h-screen w-full">
       {/* Transcription Panel */}
-      <div className="flex h-full w-full flex-col rounded-lg bg-gray-100 dark:bg-gray-800">
-        <div className="bg-gray-100 p-6 dark:bg-gray-800">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-            Transcribing - {transcription_language ?? "English"}
-          </h2>
+      <div className="flex w-full flex-col rounded-lg m-6 bg-gray-100 dark:bg-gray-800 overflow-scroll">
+        <div className="bg-gray-100 p-2 dark:bg-gray-800">
         </div>
-        <div className="flex h-full flex-col items-center justify-center gap-4 p-6">
+        <h5>{transcription_language}</h5>
+        <div className="flex gap-4 p-2">
           <p className="text-lg text-gray-500 dark:text-gray-400 md:text-xl lg:text-2xl">
             {combinedTranscription || "Not started..."}
           </p>

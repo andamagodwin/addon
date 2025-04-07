@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+// import { RealtimeTranscription } from "@/components/sidepanel/RealtimeTranscription"
 import Link from "next/link"
 import SidePanel from "@/components/sidepanel/SidePanel"
 import { useAuthContext } from "@/Context/AuthContext"
@@ -17,6 +18,7 @@ import {
 import { AlertCircle, Settings, User, LogOut, CircleX } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Image from "next/image"
+import { RealtimeTranscription } from "@/components/sidepanel/RealtimeTranscription"
 
 export default function Page() {
 
@@ -108,11 +110,13 @@ export default function Page() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-4">
         <div className="max-w-7xl mx-auto">
           <SidePanel />
+
         </div>
       </main>
+      <RealtimeTranscription/>
     </div>
   )
 }

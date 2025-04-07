@@ -98,10 +98,28 @@ export const RealtimeTranscription = forwardRef(function RealtimeTranscription(
   }));
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <button onClick={listDevices}>Select device</button>
-      <button onClick={startTranscript}>START</button>
-      <button onClick={stopTranscript}>STOP</button>
+    <div className="flex flex-col items-center justify-center gap-1  -mt-32">
+      <div className='flex justify-evenly align-middle w-full'>
+        <button
+          onClick={listDevices}
+          className="px-6 py-3 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition duration-200"
+        >
+          Select Device
+        </button>
+        <button
+          onClick={startTranscript}
+          className="px-6 py-3 bg-green-500 text-white font-medium rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 transition duration-200"
+        >
+          Start
+        </button>
+        <button
+          onClick={stopTranscript}
+          className="px-6 py-3 bg-red-500 text-white font-medium rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 transition duration-200"
+        >
+          Stop
+        </button>
+      </div>
+      
       <TranscriptPanel transcription={transcription} />
     </div>
   );
