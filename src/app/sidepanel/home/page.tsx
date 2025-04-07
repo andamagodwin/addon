@@ -17,22 +17,13 @@ import {
 import { AlertCircle, Settings, User, LogOut, CircleX } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Image from "next/image"
-import { useSidePanel } from "@/Context/SidePanelContext"
 
 export default function Page() {
-  const {startActivity,isInitialized} = useSidePanel()
+
   const {auth, isLoading,logout} = useAuthContext()
   console.log("auth",auth)
   
-  const handleStartActivity = async () => {
-    try {
-      await startActivity();
-    } catch (error) {
-      console.error('Failed to start activity:', error);
-      alert('Failed to start activity. Please try again.');
-    }
-
-  }
+  
 
   const [showExtensionAlert, setShowExtensionAlert] = useState(true)
 
@@ -82,19 +73,7 @@ export default function Page() {
             <Image src="/logo-color-png.png" alt="Lingomeet Logo" width={40} height={40} />
           </div>
           <h5 className="text-sm font-semibold mb-1">Hi, {auth.user?.name}!</h5>
-          {auth.user?.userType === "lecturer" && (
-            <div>
-              {isInitialized ? (
-                <button className="text-sm font-semibold p-2 bg-green-500" onClick={handleStartActivity}>
-                  Take Attendance
-                </button>
-              ) : (
-                <button className="text-sm font-semibold p-2 bg-gray-400 cursor-not-allowed">
-                  Initializing Side Panel...
-                </button>
-              )}
-            </div>
-          )}
+          
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

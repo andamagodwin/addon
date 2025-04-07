@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Poppins } from "next/font/google";
 import { AuthProvider } from "@/Context/AuthContext";
 import "./globals.css";
-import { SidePanelProvider } from "@/Context/SidePanelContext";
+
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -30,9 +30,9 @@ export default function RootLayout({
     <html lang="en" className={`${poppins.variable} ${geistMono.variable}`}>
       <AuthProvider>
         <body className="font-sans antialiased">
-          <SidePanelProvider>
+
             {children}
-          </SidePanelProvider>
+          
           
         </body>
       </AuthProvider>
