@@ -1,5 +1,6 @@
 'use client';
 
+
 import TabsComponent from './TabsComponent';
 import TranscriptTab from './tabs/TranscriptTab';
 import NotesTab from './tabs/NotesTab';
@@ -33,6 +34,7 @@ export default function SidePanel() {
   return (
     <div className="h-[500px] w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <TabsComponent tabs={tabs} defaultTab="transcript" />
+      
     </div>
   );
 }

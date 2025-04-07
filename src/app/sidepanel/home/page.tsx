@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { AlertCircle, Settings, User, LogOut, CircleX } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 
 export default function Page() {
@@ -53,7 +52,7 @@ export default function Page() {
         <Alert className="rounded-none border-b bg-green-100 flex items-center">
           <AlertCircle color="green" className="h-4 w-4 text-green-500" />
           <AlertDescription className="flex items-center justify-between w-full">
-            <span>Enhance your experience by installing our <Link href="/extension" className="underline text-green-600 hover:text-green-800">
+            <span className="text-xs">Enhance your experience by installing our <Link href="/extension" className="underline text-green-600 hover:text-green-800">
               browser extension
               </Link></span>
             <div className="">
@@ -72,6 +71,7 @@ export default function Page() {
           <div>
             <Image src="/logo-color-png.png" alt="Lingomeet Logo" width={40} height={40} />
           </div>
+          <h5 className="text-sm font-semibold mb-1">Hi, {auth.user?.name}!</h5>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -108,13 +108,6 @@ export default function Page() {
       {/* Main Content */}
       <main className="flex-1 p-6">
         <div className="max-w-7xl mx-auto">
-          <Card className="mb-6">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">Welcome back, {auth.user?.name}!</h2>
-              <p className="text-muted-foreground">Access your addon features and settings below.</p>
-            </CardContent>
-          </Card>
-
           <SidePanel />
         </div>
       </main>

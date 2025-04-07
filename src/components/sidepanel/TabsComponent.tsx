@@ -27,7 +27,7 @@ export default function TabsComponent({ tabs, defaultTab }: TabsProps) {
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 text-sm font-medium relative focus:outline-none ${
               activeTab === tab.id
-                ? 'text-blue-600 dark:text-blue-400'
+                ? 'text-green-600 dark:text-green-400'
                 : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
             }`}
           >
@@ -35,7 +35,7 @@ export default function TabsComponent({ tabs, defaultTab }: TabsProps) {
             {activeTab === tab.id && (
               <motion.div
                 layoutId="activeTabIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500 dark:bg-green-400"
                 initial={false}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               />

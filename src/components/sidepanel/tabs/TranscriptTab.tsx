@@ -1,15 +1,45 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Switch } from "@/components/ui/switch"
 import { Info } from "lucide-react"
+import { RealtimeTranscription } from "../RealtimeTranscription"
+import AnimatedLogo from "@/components/shared/animated-logo"
+
+
+
 
 export default function TranscriptTab() {
+  const transcriptionRef = useRef<{ startTranscript: () => void; stopTranscript: () => void } | null>(null);
   const [saveTranscription, setSaveTranscription] = useState(false)
   const [language, setLanguage] = useState("english")
+
+
+  
+
+  const handleStart = () => {
+    console.log('Transcription started!');
+  };
+
+  const startTranscriptionFromParent = () => {
+    transcriptionRef.current?.startTranscript();
+  };
+
+  const stopTranscriptionFromParent = () => {
+    transcriptionRef.current?.stopTranscript();
+  };
+
+  const handleSaveTranscriptionChange = (checked: boolean) => {
+    setSaveTranscription(checked)
+    if (checked) {
+      startTranscriptionFromParent();
+    } else {
+      stopTranscriptionFromParent();
+    }
+  }
 
   return (
     <Card className="w-full">
@@ -18,7 +48,7 @@ export default function TranscriptTab() {
         <CardDescription>Configure how your transcriptions are handled</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="flex items-center justify-between space-x-2">
+        <div className="flex items-center justify-between space-x-1">
           <div className="space-y-0.5">
             <Label htmlFor="save-transcription" className="font-medium text-green-700">
               Save my transcription
@@ -28,7 +58,7 @@ export default function TranscriptTab() {
           <Switch
             id="save-transcription"
             checked={saveTranscription}
-            onCheckedChange={setSaveTranscription}
+            onCheckedChange={handleSaveTranscriptionChange}
             className="data-[state=checked]:bg-green-500"
           />
         </div>
@@ -50,28 +80,25 @@ export default function TranscriptTab() {
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="english" id="english" className="text-green-500 border-green-500" />
-                <Label htmlFor="english">English</Label>
+                <Label htmlFor="english">Luganda</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="spanish" id="spanish" className="text-green-500 border-green-500" />
-                <Label htmlFor="spanish">Spanish</Label>
+                <Label htmlFor="spanish">Alur</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="french" id="french" className="text-green-500 border-green-500" />
-                <Label htmlFor="french">French</Label>
+                <Label htmlFor="french">Acholi</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="german" id="german" className="text-green-500 border-green-500" />
-                <Label htmlFor="german">German</Label>
+                <Label htmlFor="german">Luo</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="chinese" id="chinese" className="text-green-500 border-green-500" />
-                <Label htmlFor="chinese">Chinese</Label>
+                <Label htmlFor="chinese">English</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="japanese" id="japanese" className="text-green-500 border-green-500" />
-                <Label htmlFor="japanese">Japanese</Label>
-              </div>
+              
             </RadioGroup>
           </div>
         )}
@@ -79,9 +106,25 @@ export default function TranscriptTab() {
         <div className="flex items-start gap-2 p-3 rounded-md bg-green-50 border border-green-200">
           <Info className="h-5 w-5 text-green-500 mt-0.5" />
           <p className="text-sm text-green-700">
-            Real-time transcription is not currently available. This feature will be implemented in a future update.
+            Real-time transcription is currently under development. This feature will be improved in a future update.
           </p>
         </div>
+
+
+        {saveTranscription && (
+          <div className="w-full flex items-center justify-center align-middle">
+            <AnimatedLogo/>
+          </div>
+          
+        )}
+
+
+
+        <div>
+        <RealtimeTranscription ref={transcriptionRef} onStart={handleStart} />
+        </div>
+        
+        
       </CardContent>
     </Card>
   )

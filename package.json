@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@deepgram/sdk": "^3.11.3",
     "@google-cloud/speech": "^7.0.1",
     "@googleworkspace/meet-addons": "^1.2.0",
     "@radix-ui/react-avatar": "^1.1.3",
@@ -36,6 +37,7 @@
     "react-datepicker": "^8.2.1",
     "react-dom": "^19.0.0",
     "socket.io-client": "^4.8.1",
+    "speechmatics": "^4.0.1",
     "tailwind-merge": "^3.1.0",
     "tw-animate-css": "^1.2.5"
   },
