@@ -18,7 +18,6 @@ import {
 import { AlertCircle, Settings, User, LogOut, CircleX } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Image from "next/image"
-import { RealtimeTranscription } from "@/components/sidepanel/RealtimeTranscription"
 
 export default function Page() {
 
@@ -116,7 +115,6 @@ export default function Page() {
 
         </div>
       </main>
-      <RealtimeTranscription/>
     </div>
   )
 }
